@@ -1,0 +1,4 @@
+# Ignore Tomcat deployment
+/webapps/
+/target/
+/*.war
