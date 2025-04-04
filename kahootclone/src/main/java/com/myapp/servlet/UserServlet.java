@@ -41,37 +41,48 @@ public class UserServlet extends HttpServlet {
             stmt.executeUpdate();
             HttpSession session = request.getSession();
             session.setAttribute("email", email);
-            response.sendRedirect("home");
+            response.sendRedirect("pages/home.html");
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("loginerror.jsp");
         }
     }
 
-    private void loginUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void loginUser(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        try {
+            // Explicitly load the MySQL driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/im2073mobileproj", "myuser",
-                "xxxx")) {
+            String url = "jdbc:mysql://localhost:3306/im2073mobileproj";
+            Connection conn = DriverManager.getConnection(url, "myuser", "xxxx");
+
             String sql = "SELECT * FROM teachers WHERE EMAIL=? AND PASS=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
             stmt.setString(2, password);
 
+            System.out.println("Executing query: " + sql); // Log the query
+
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                int userId = rs.getInt("user_id");
+                int teacherId = rs.getInt("TEACHER_ID");
+                System.out.println("teacher id is " + teacherId);
                 HttpSession session = request.getSession();
-                session.setAttribute("userId", userId);
-                response.sendRedirect("home");
+                session.setAttribute("teacherId", teacherId);
+                response.sendRedirect("pages/home.html");
             } else {
                 String message = "Password wrong! Please try again";
                 request.setAttribute("message", message);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
                 dispatcher.forward(request, response);
             }
-        } catch (Exception e) {
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            response.sendRedirect("loginerror.jsp");
+        } catch (SQLException e) {
             e.printStackTrace();
             response.sendRedirect("loginerror.jsp");
         }
