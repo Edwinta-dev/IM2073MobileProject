@@ -1,0 +1,24 @@
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 50px; /* Optional: space between elements */
+    justify-content: flex-start;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+  }
+  
+.element {
+    /* You can add more styles here if needed */
+}
+
+.question{
+    outline: 2px solid #9ccf49;
+    padding: 5px;
+}
+
+.titleContainer{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

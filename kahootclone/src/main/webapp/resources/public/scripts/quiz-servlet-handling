@@ -1,0 +1,50 @@
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.quiz-action').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const action = btn.dataset.action;
+      let data ={};
+      if (btn.dataset.teacherId){
+        console.log("Only teacher loop")
+        data = {
+            teacherId:btn.dataset.teacherId
+        }   
+      }else if (btn.dataset.teacher && btn.dataset.quizId){
+        console.log("teacher and quiz loop");
+        data = {
+            teacher_id:btn.dataset.teacher,
+            quiz_id:btn.dataset.quizId
+        }
+      }else if (btn.dataset.teacher && btn.dataset.quizId && btn.dataset.question){
+        console.log("teacher, quiz and question loop")
+        data = {
+            teacherId: btn.dataset.teacher,
+            quizId: btn.dataset.quizId,
+            question: btn.dataset.question
+        }
+      }else{
+        console.log("No data detected");
+      }
+      handleQuizRequest(action,data);
+    });
+  });
+});
+
+function handleQuizRequest(action, data) {
+    const payload = {
+        action: action,
+        data: data
+      };    
+    console.log(payload);
+    fetch('/quizServlet', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ action: action, data: data })
+    })
+    .then(response => response.json())
+    .then(responseData => {
+      console.log(responseData);
+    })
+    .catch(error => console.error('Error:', error));
+  }

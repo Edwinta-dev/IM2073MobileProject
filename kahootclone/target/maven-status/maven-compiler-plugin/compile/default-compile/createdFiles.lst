@@ -1,1 +1,3 @@
+com\myapp\model\Option.class
+com\myapp\model\Question.class
 com\myapp\servlet\UserServlet.class

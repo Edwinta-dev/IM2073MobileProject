@@ -1,0 +1,33 @@
+#tickbutton {
+    background-image: url('../../public/images/tick.png');
+    background-size: cover; /* Ensure the image is scaled correctly */
+    background-repeat: no-repeat;
+    width: 30px; /* Set the button width */
+    height: 30px; /* Set the button height */
+    border: none; /* Remove the border */
+    cursor: pointer; /* Make the cursor a pointer when hovering */
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 50px; /* Optional: space between elements */
+    justify-content: flex-start;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+  }
+  
+.element {
+    /* You can add more styles here if needed */
+}
+
+.question{
+    outline: 2px solid #9ccf49;
+    padding: 5px;
+}
+
+.titleContainer{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+}

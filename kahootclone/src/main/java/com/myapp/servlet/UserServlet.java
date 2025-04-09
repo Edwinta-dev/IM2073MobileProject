@@ -72,7 +72,7 @@ public class UserServlet extends HttpServlet {
                 System.out.println("teacher id is " + teacherId);
                 HttpSession session = request.getSession();
                 session.setAttribute("teacherId", teacherId);
-                response.sendRedirect("pages/home.html");
+                response.sendRedirect("pages/home.jsp");
             } else {
                 String message = "Password wrong! Please try again";
                 request.setAttribute("message", message);
@@ -91,7 +91,7 @@ public class UserServlet extends HttpServlet {
     private void logoutUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         session.invalidate();
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("pages/login.jsp");
     }
 
 }

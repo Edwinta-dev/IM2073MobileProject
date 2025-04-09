@@ -27,8 +27,25 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>9.2.0</version>
     </dependency>
+    <dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.8.8</version>
+</dependency>
+
+  
   </dependencies>
   <build>
-    <finalName>kahootclone</finalName>
+  <finalName>kahootclone</finalName> 
+  <plugins>
+    <plugin>
+      <artifactId>maven-war-plugin</artifactId>
+      <version>3.3.2</version>
+      <configuration>
+        <outputDirectory>C:/tomcat/webapps</outputDirectory>
+      </configuration>
+    </plugin>
+  </plugins>
   </build>
+  
 </project>
